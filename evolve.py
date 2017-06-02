@@ -47,8 +47,7 @@ def printNewProgenitor(x, printLines = True):
 		    print(line)
 	    #print()
 
-def main(ancestorResult):
-	global bestResult
+def main(ancestorResult = 0):
 	global generationNumber
 	global progenitor
 	for i in range (0, 10000):
@@ -60,12 +59,12 @@ def main(ancestorResult):
 		except:
 			continue
 
-		if x > bestResult:
-			bestResult = x
+		if x > ancestorResult:
+			ancestorResult = x
 			generationNumber += 1
 			progenitor = mutant
 			printNewProgenitor(x)
-			addToBuildingBlocks(str(bestResult))
-			main(bestResult)
+			addToBuildingBlocks(str(ancestorResult))
+			main(ancestorResult)
 
-main(bestResult)
+main()
