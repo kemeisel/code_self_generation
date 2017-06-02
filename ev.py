@@ -2,10 +2,11 @@ from random import randint
 from random import choice
 from os import remove
 
+subfolder = 'generations/'
 
 def mutate(parentID, childID):
 	lines = []
-	for line in open(str(parentID) + ".py"):
+	for line in open(subfolder + str(parentID) + ".py"):
 		if preserve():
 			lines.append(line)
 		if insert():
@@ -16,7 +17,7 @@ def mutate(parentID, childID):
 			
 def saveFile(parentID, childID, lines):
 	fileName = str(parentID) + "_" + str(childID) + ".py"
-	file = open(fileName, "w")
+	file = open(subfolder + fileName, "w")
 	for line in lines:
 		if line != None:
 			file.write(line + "\n")
@@ -46,16 +47,16 @@ def cull(parentID, childID):
 	global best
 	fileName = str(parentID) + "_" + str(childID)
 	try:
-		execfile(fileName + ".py")
+		execfile(subfolder + fileName + ".py")
 		#print fileName
 		#print y
 		if y > highest:
 			highest = y
 			best = fileName
 		else:
-			remove(fileName + ".py")
+			remove(subfolder + fileName + ".py")
 	except:
-		remove(fileName + ".py")	
+		remove(subfolder + fileName + ".py")	
 	
 
 best = "0"
