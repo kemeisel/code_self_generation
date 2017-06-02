@@ -7,6 +7,10 @@ progenitor = [""]
 generationNumber = 0
 bestResult = 0;
 
+def addToBuildingBlocks(newValue):
+    global buildingBlocks
+    buildingBlocks.append(newValue)
+    #print(buildingBlocks)
 
 def createNewLine():
 	line = ""
@@ -60,7 +64,8 @@ def main(ancestorResult):
 			bestResult = x
 			generationNumber += 1
 			progenitor = mutant
-			printNewProgenitor(x, False)
-			main(x)
+			printNewProgenitor(x)
+			addToBuildingBlocks(str(bestResult))
+			main(bestResult)
 
 main(bestResult)
