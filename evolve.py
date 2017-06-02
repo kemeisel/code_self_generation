@@ -35,25 +35,32 @@ def mutate():
 	return mutant
 	
 
-def printNewProgenitor(x):
+def printNewProgenitor(x, printLines = True):
 	print("Best Result: " + str(x))
 	print("Generation: " + str(generationNumber))
-	for line in progenitor:
-		print(line)
-	print()
+	if printLines == True:
+	    for line in progenitor:
+		    print(line)
+	    #print()
 
+def main(ancestorResult):
+	global bestResult
+	global generationNumber
+	global progenitor
+	for i in range (0, 10000):
+		mutant = mutate()
+		x = 0
+		executable = "\n".join(mutant)
+		try:
+			exec(executable)
+		except:
+			continue
 
-for i in range (0, 10000):
-	mutant = mutate()
-	x = 0
-	executable = "\n".join(mutant)
-	try:
-		exec(executable)
-	except:
-		continue
+		if x > bestResult:
+			bestResult = x
+			generationNumber += 1
+			progenitor = mutant
+			printNewProgenitor(x, False)
+			main(x)
 
-	if x > bestResult:
-		bestResult = x
-		generationNumber += 1
-		progenitor = mutant
-		printNewProgenitor(x)
+main(bestResult)
